@@ -2,7 +2,11 @@ import {
   Box,
   Button,
   Container,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   Stack,
   TextField,
   Typography,
@@ -21,7 +25,7 @@ const SignUp = () => {
       password: "",
       phone: "",
       birthday: "",
-      gender: true,
+      gender: undefined,
       role: "",
       skill: [""],
       certification: [""],
@@ -31,12 +35,20 @@ const SignUp = () => {
 
   const { mutate: handleSignUp } = useMutation({
     mutationFn: (data) => signUpAPI(data),
-    onSuccess: () => {},
+    onSuccess: () => {
+      console.log("Sign up successful:", data);
+    },
   });
 
   const onSubmit = (values) => {
-    console.log("SignUp:", values);
-    handleSignUp(values);
+    const transformedData = {
+      ...values,
+      id: parseInt(values.id, 10),
+      gender: values.gender === "male", // true nếu giới tính là Nam, ngược lại là false
+    };
+
+    console.log("Transformed Data:", transformedData);
+    handleSignUp(transformedData);
   };
   return (
     <Container maxWidth="sm">
@@ -58,7 +70,18 @@ const SignUp = () => {
               <TextField label="Password" {...register("password")} />
               <TextField label="Phone" {...register("phone")} />
               <TextField label="Birth Day" {...register("birthday")} />
-              <TextField label="Gender" {...register("gender")} />
+              <FormControl>
+                <InputLabel id="gender-label">Gender</InputLabel>
+                <Select
+                  label="Gender"
+                  {...register("gender", { required: true })}
+                  defaultValue="male"
+                >
+                  <MenuItem value="male">Male</MenuItem>
+                  <MenuItem value="female">Female</MenuItem>
+                </Select>
+              </FormControl>
+
               <TextField label="Role" {...register("role")} />
               <TextField label="Skill" {...register("skill")} />
               <TextField label="Certification" {...register("certification")} />
