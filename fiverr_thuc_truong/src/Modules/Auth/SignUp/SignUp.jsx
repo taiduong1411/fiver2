@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Container,
   FormControl,
@@ -43,8 +42,16 @@ const SignUp = () => {
   const onSubmit = (values) => {
     const transformedData = {
       ...values,
-      id: parseInt(values.id, 10),
-      gender: values.gender === "male", // true nếu giới tính là Nam, ngược lại là false
+      // id: parseInt(values.id, 10),
+      gender: values.gender === "male",
+      skill: values.skill
+        ? values.skill.split(",").map((skill) => skill.trim())
+        : [],
+      certification: values.certification
+        ? values.certification
+            .split(",")
+            .map((certification) => certification.trim())
+        : [],
     };
 
     console.log("Transformed Data:", transformedData);

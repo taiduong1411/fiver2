@@ -14,7 +14,7 @@ export const signInAPI = async (data) => {
 export const signUpAPI = async (data) => {
   try {
     const response = await fetcher.post("/auth/signup", data);
-    console.log("SignUp:", values);
+    console.log("SignUp:", data);
     return response.data.content;
   } catch (error) {
     console.error("Error onSubmit:", error);
