@@ -10,8 +10,14 @@ import { useMutation } from "@tanstack/react-query";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { signInAPI } from "../../../API/userAPI";
+import { useAuth } from "../../../Contexts/useContext/useContext";
+import { Navigate, useNavigate } from "react-router-dom";
+import { PATH } from "../../../Routes/path";
 
 const SignIn = () => {
+  const { handleSignIn: handleSignInContext, currentUser } = useAuth();
+  const navigate = useNavigate();
+
   const { register, handleSubmit } = useForm({
     defaultValues: {
       email: "",
@@ -22,12 +28,25 @@ const SignIn = () => {
 
   const { mutate: handleSignin } = useMutation({
     mutationFn: (values) => signInAPI(values),
-    onSuccess: () => {},
+    onSuccess: (values) => {
+      handleSignInContext(values);
+      if (values.role === "USER") navigate(PATH.HOME);
+
+      if (values.role === "ADMIN") navigate(PATH.ADMIN);
+    },
+    onError: () => {
+      alert("Account does not exist");
+    },
   });
+
+  // if (currentUser) {
+  //   return <Navigate to={PATH.HOME} />;
+  // }
 
   const onSubmit = (formValue) => {
     handleSignin(formValue);
   };
+
   return (
     <Container maxWidth="sm">
       <Typography variant="h5" textAlign={"center"} mb={2}>

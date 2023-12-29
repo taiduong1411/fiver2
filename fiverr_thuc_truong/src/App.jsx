@@ -3,12 +3,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PATH } from "./Routes/path";
 import ClientLayout from "./Layouts/ClientLayout";
 import Home from "./Modules/Home";
-import { UserProvider } from "./Contexts/useContext/useContext";
 import SignUp from "./Modules/Auth/SignUp/SignUp";
 import SignIn from "./Modules/Auth/SignIn/SignIn";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import NotFound from "./Modules/NotFound";
+import { UserProvider } from "./Contexts/useContext/useContext";
 
 function App() {
   return (

@@ -16,9 +16,56 @@ import { useMutation } from "@tanstack/react-query";
 import { signUpAPI } from "../../../API/userAPI";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
+import { Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../../../Contexts/useContext/useContext";
+import { PATH } from "../../../Routes/path";
+// Error
+const schemaSignUp = yup.object({
+  name: yup
+    .string()
+    .required("You cannot leave this field blank")
+    .matches(
+      /^[\p{L}\s]+$/u,
+      "The name cannot contain numbers or special characters"
+    ),
+  email: yup
+    .string()
+    .required("You cannot leave this field blank")
+    .matches(
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+      "Please enter the correct email format"
+    ),
+  password: yup
+    .string()
+    .required("You cannot leave this field blank")
+    .matches(
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
+      "Password must contain at least 8 characters, including at least one numeric character, one uppercase character and one special character"
+    ),
+  phone: yup
+    .string()
+    .required("You cannot leave this field blank")
+    .matches(/^[0-9\-\+]{9,12}$/, "Phone number is incorrect"),
+  birthday: yup
+    .string()
+    .required("You cannot leave this field blank")
+    .matches(),
+  skill: yup.string().required("You cannot leave this field blank"),
+  certification: yup.string().required("You cannot leave this field blank"),
+});
 const SignUp = () => {
-  const { register, handleSubmit, control, setValue } = useForm({
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    control,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       id: 0,
       name: "",
@@ -32,12 +79,18 @@ const SignUp = () => {
       certification: [""],
     },
     mode: "all",
+    resolver: yupResolver(schemaSignUp),
   });
 
   const { mutate: handleSignUp } = useMutation({
     mutationFn: (data) => signUpAPI(data),
     onSuccess: () => {
       console.log("Sign up successful:", data);
+      navigate(PATH.SIGNIN);
+    },
+    onError: (err) => {
+      console.log("err: ", err);
+      alert("Error!!!");
     },
   });
 
@@ -61,6 +114,9 @@ const SignUp = () => {
     console.log("Transformed Data:", transformedData);
     handleSignUp(transformedData);
   };
+  if (currentUser) {
+    return <Navigate to={PATH.HOME} />;
+  }
   return (
     <Container maxWidth="sm">
       <Typography variant="h5" textAlign={"center"} mb={2}>
@@ -75,10 +131,31 @@ const SignUp = () => {
         <Grid item lg={6}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={2}>
-              <TextField label="Name" {...register("name")} />
-              <TextField label="Email" {...register("email")} />
-              <TextField label="Password" {...register("password")} />
-              <TextField label="Phone" {...register("phone")} />
+              <TextField
+                label="Name"
+                {...register("name")}
+                error={Boolean(errors.name)}
+                helperText={Boolean(errors.name) && errors.name.message}
+              />
+              <TextField
+                label="Email"
+                {...register("email")}
+                error={Boolean(errors.email)}
+                helperText={Boolean(errors.email) && errors.email.message}
+              />
+              <TextField
+                label="Password"
+                type="password"
+                {...register("password")}
+                error={Boolean(errors.password)}
+                helperText={Boolean(errors.password) && errors.password.message}
+              />
+              <TextField
+                label="Phone"
+                {...register("phone")}
+                error={Boolean(errors.phone)}
+                helperText={Boolean(errors.phone) && errors.phone.message}
+              />
               <Controller
                 control={control}
                 name="birthday"
@@ -108,8 +185,20 @@ const SignUp = () => {
                   <MenuItem value="female">Female</MenuItem>
                 </Select>
               </FormControl>
-              <TextField label="Skill" {...register("skill")} />
-              <TextField label="Certification" {...register("certification")} />
+              <TextField
+                label="Skill"
+                {...register("skill")}
+                error={Boolean(errors.skill)}
+                helperText={Boolean(errors.skill) && errors.skill.message}
+              />
+              <TextField
+                label="Certification"
+                {...register("certification")}
+                error={Boolean(errors.certification)}
+                helperText={
+                  Boolean(errors.certification) && errors.certification.message
+                }
+              />
               <Button variant="contained" type="submit" size="large">
                 SIGN UP
               </Button>
