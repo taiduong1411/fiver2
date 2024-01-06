@@ -18,7 +18,6 @@ import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../Contexts/useContext/useContext";
 import { PATH } from "../../../Routes/path";
@@ -90,7 +89,6 @@ const SignUp = () => {
     },
     onError: (err) => {
       console.log("err: ", err);
-      alert("Error!!!");
     },
   });
 
@@ -99,7 +97,6 @@ const SignUp = () => {
       ...values,
       id: values.id,
       role: values.role,
-
       gender: values.gender === "male",
       skill: values.skill
         ? values.skill.split(",").map((skill) => skill.trim())
@@ -111,7 +108,7 @@ const SignUp = () => {
         : [],
     };
 
-    console.log("Transformed Data:", transformedData);
+    console.log("Data:", transformedData);
     handleSignUp(transformedData);
   };
   if (currentUser) {

@@ -39,9 +39,10 @@ const HeaderClient = () => {
           <img
             src="./Image/logoFiverr.jpg"
             alt=""
-            style={{ width: 100, cursor: "pointer" }}
+            style={{ width: 100, height: 100, cursor: "pointer" }}
           />
         </Typography>
+
         {currentUser ? (
           <Stack
             spacing={2}
@@ -49,7 +50,7 @@ const HeaderClient = () => {
             textAlign={"center"}
             alignItems={"center"}
           >
-            <Typography>{currentUser.name}</Typography>
+            <Typography>{currentUser.user.name}</Typography>
             <Button
               size="large"
               variant="text"

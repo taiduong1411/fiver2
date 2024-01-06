@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "sources": [
+    "../Sass/Bases/_mixin.scss",
+    "main.css",
+    "../Sass/Layouts/_carousel.scss"
+  ],
+  "names": [],
+  "mappings": "AAAA;EACE,eAAA;ACCF;;ACFA;EACE,gBAAA;ADKF",
+  "file": "main.css"
+}
