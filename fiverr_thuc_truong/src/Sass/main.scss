@@ -1,21 +1,8 @@
-// //helpers
-// @import "./Helpers/variable";
+// Import Base
 @import "./Bases/mixin";
+@import "./Bases/reset.scss";
 
-// //Vendors: chứa code của thư viện
-
-// //Base
-// @import "./Base/reset";
-// @import "./Base/customize";
-// //Components
-
-// //Layouts
-// @import "./Layouts/header";
+// Import Layouts
 @import "./Layouts/carousel";
-// @import "./Layouts/product";
-// @import "./Layouts/footer";
-
-// //Pages
-
-// //Themes
-// @import "./Themes/darkMode";
+@import "./Layouts/jobtypemenu";
+@import "./Layouts/header";

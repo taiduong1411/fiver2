@@ -1,0 +1,45 @@
+.jobTypeMenu {
+  padding: 0px 80px;
+  margin-top: 60px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  .buttonJobTypeMenu {
+    position: relative;
+    display: inline-block;
+
+    &:hover .menuItemJobType {
+      display: block;
+    }
+
+    .menuItemJobType {
+      display: none;
+      position: absolute;
+      z-index: 1000;
+      margin-left: 16px;
+      background-color: white;
+      padding: 8px;
+    }
+
+    Button {
+      color: white;
+    }
+  }
+
+  h4 {
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 4px;
+    }
+  }
+}

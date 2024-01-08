@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import React from "react";
 import Carousel from "./Carousel";
-import HeaderBottom from "./HeaderBottom";
+import JobTypeMenu from "./JobTypeMenu";
 
 const Home = () => {
   return (
     <Box>
-      <HeaderBottom />
+      <JobTypeMenu />
       <Carousel />
     </Box>
   );

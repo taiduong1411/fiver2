@@ -12,27 +12,24 @@ const Carousel = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
+
   return (
-    <Box>
-      <h2> Single Item</h2>
+    <Box className="carousel-container">
       <Slider {...settings}>
         <Box>
           <img className="img-carousel" src="./Image/1.png" alt="..." />
         </Box>
         <Box>
-          <img src="./Image/2.png" alt="..." />
+          <img className="img-carousel" src="./Image/2.png" alt="..." />
         </Box>
         <Box>
-          <img src="./Image/3.png" alt="..." />
+          <img className="img-carousel" src="./Image/3.png" alt="..." />
         </Box>
         <Box>
-          <img src="./Image/4.png" alt="..." />
+          <img className="img-carousel" src="./Image/4.png" alt="..." />
         </Box>
         <Box>
-          <img src="./Image/5.png" alt="..." />
-        </Box>
-        <Box>
-          <img src="./Image/6.png" alt="..." />
+          <img className="img-carousel" src="./Image/5.png" alt="..." />
         </Box>
       </Slider>
     </Box>

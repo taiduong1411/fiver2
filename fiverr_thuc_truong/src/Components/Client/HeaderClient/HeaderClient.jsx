@@ -17,8 +17,8 @@ const HeaderClient = () => {
   const { currentUser, handleLogOut } = useAuth();
   console.log("currentUser: ", currentUser);
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Toolbar>
+    <Box className="header-container" sx={{ flexGrow: 1 }}>
+      <Toolbar className="header-toolbar">
         <IconButton
           size="large"
           edge="start"
