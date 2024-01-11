@@ -19,6 +19,7 @@ import { getListJobByName } from '../../../API/jobAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useHeaderStore } from '../../../store/useHeaderStore';
 import {
   Search,
   SearchIconWrapper,
@@ -27,7 +28,8 @@ import {
 
 const HeaderClient = () => {
   const [search, setSearch] = useState('');
-  const [sticky, setSticky] = useState(false);
+  const { sticky, setSticky, setUnSticky } = useHeaderStore();
+
   const media = useMediaQuery('(min-width: 768px)');
 
   const { isLoading, data: jobs = [] } = useQuery({
@@ -50,14 +52,14 @@ const HeaderClient = () => {
 
   /* Method that will fix header after a specific scrollable */
   const isSticky = (e) => {
-    const header = document.querySelector('.header-section');
     const scrollTop = window.scrollY;
-    scrollTop >= 100
-      ? header.classList.add('is-sticky') & setSticky(true)
-      : header.classList.remove('is-sticky') & setSticky(false);
+    scrollTop >= 100 ? setSticky() : setUnSticky();
   };
   return (
-    <Box className="header-section header-container " sx={{ flexGrow: 1 }}>
+    <Box
+      className={`header-section header-container ${sticky ? 'is-sticky' : ''}`}
+      sx={{ flexGrow: 1 }}
+    >
       <Toolbar className="header-toolbar">
         {!media && (
           <IconButton
@@ -158,6 +160,7 @@ const HeaderClient = () => {
             <Button
               variant="outlined"
               sx={{
+                textTransform: 'capitalize',
                 borderColor: !sticky ? 'white' : 'black',
                 color: !sticky ? 'white' : 'black',
               }}
@@ -170,6 +173,9 @@ const HeaderClient = () => {
             <Button
               variant="contained"
               color="success"
+              sx={{
+                textTransform: 'capitalize',
+              }}
               onClick={() => {
                 navigate(PATH.SIGNIN);
               }}

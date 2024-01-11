@@ -10,7 +10,7 @@ const FilterBar = () => {
       flexWrap={'wrap'}
     >
       <Box>
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormControl size="small" sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="demo-simple-select-helper-label">Category</InputLabel>
           <Select
             labelId="demo-simple-select-helper-label"
@@ -25,7 +25,7 @@ const FilterBar = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormControl size="small" sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="demo-simple-select-helper-label">
             Service Option
           </InputLabel>
@@ -42,7 +42,7 @@ const FilterBar = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormControl size="small" sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="demo-simple-select-helper-label">
             Seller Details
           </InputLabel>
@@ -59,7 +59,7 @@ const FilterBar = () => {
           </Select>
         </FormControl>
 
-        <FormControl sx={{ m: 1, minWidth: 150 }}>
+        <FormControl size="small" sx={{ m: 1, minWidth: 150 }}>
           <InputLabel id="demo-simple-select-helper-label">
             Delivery Time
           </InputLabel>
