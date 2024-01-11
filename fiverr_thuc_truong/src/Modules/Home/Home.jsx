@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import Carousel from './Carousel';
 import Content from './Content/Content';
 import JobTypeMenu from './JobTypeMenu';
+import MainCategory from './MainCategory/MainCategory';
 import Services from './Services';
 
 const Home = () => {
@@ -11,6 +12,7 @@ const Home = () => {
       <Carousel />
       <Services />
       <Content />
+      <MainCategory />
     </Box>
   );
 };
