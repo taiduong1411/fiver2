@@ -1,18 +1,18 @@
 import {
+  Box,
   Button,
   Container,
   Grid,
   Stack,
   TextField,
   Typography,
-} from "@mui/material";
-import { useMutation } from "@tanstack/react-query";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { signInAPI } from "../../../API/userAPI";
-import { useAuth } from "../../../Contexts/useContext/useContext";
-import { Navigate, useNavigate } from "react-router-dom";
-import { PATH } from "../../../Routes/path";
+} from '@mui/material';
+import { useMutation } from '@tanstack/react-query';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { signInAPI } from '../../../API/userAPI';
+import { useAuth } from '../../../Contexts/useContext/useContext';
+import { PATH } from '../../../Routes/path';
 
 const SignIn = () => {
   const { handleSignIn: handleSignInContext, currentUser } = useAuth();
@@ -20,22 +20,22 @@ const SignIn = () => {
 
   const { register, handleSubmit } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-    mode: "all",
+    mode: 'all',
   });
 
   const { mutate: handleSignin } = useMutation({
     mutationFn: (values) => signInAPI(values),
     onSuccess: (values) => {
       handleSignInContext(values);
-      if (values.role === "USER") navigate(PATH.HOME);
+      if (values.role === 'USER') navigate(PATH.HOME);
 
-      if (values.role === "ADMIN") navigate(PATH.ADMIN);
+      if (values.role === 'ADMIN') navigate(PATH.ADMIN);
     },
     onError: () => {
-      alert("Account does not exist");
+      alert('Account does not exist');
     },
   });
 
@@ -48,16 +48,27 @@ const SignIn = () => {
   };
 
   return (
-    <Container maxWidth="sm">
-      <Typography variant="h5" textAlign={"center"} mb={2}>
-        Login
-      </Typography>
+    <Container
+      maxWidth="sm"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+      }}
+    >
+      <Box>
+        <Typography variant="h5" textAlign={'center'} mb={2}>
+          Login
+        </Typography>
+      </Box>
 
-      <Grid container justifyContent={"center"} alignItems={"center"}>
+      <Grid container justifyContent={'center'} alignItems={'center'}>
         <Grid item md={6}>
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-              <TextField label="Email" fullWidth mb={3} {...register("email")}>
+              <TextField label="Email" fullWidth mb={3} {...register('email')}>
                 Email
               </TextField>
               <TextField
@@ -65,7 +76,7 @@ const SignIn = () => {
                 label="Password"
                 fullWidth
                 type="password"
-                {...register("password")}
+                {...register('password')}
               >
                 Password
               </TextField>

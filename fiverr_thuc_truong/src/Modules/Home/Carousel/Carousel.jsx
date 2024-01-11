@@ -2,11 +2,9 @@ import { Box } from '@mui/material';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
-import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import CarouselItem from './CarouselItem';
 
 const Carousel = () => {
-  const matches = useMediaQuery('(min-width: 768px)');
   const settings = {
     dots: true,
     infinite: true,

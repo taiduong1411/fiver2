@@ -51,7 +51,6 @@ const JobTypeMenu = () => {
             {item.dsNhomChiTietLoai && (
               <Box className="menuItemJobType">
                 {item.dsNhomChiTietLoai.map((group) => {
-                  console.log(group);
                   return (
                     <Box p={2} key={group.id}>
                       <Typography fontWeight={'bold'}>

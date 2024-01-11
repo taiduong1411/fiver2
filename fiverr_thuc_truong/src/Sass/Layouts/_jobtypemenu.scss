@@ -1,12 +1,11 @@
 .jobTypeMenu {
   padding: 0px 80px;
-  margin-top: 80px;
-  // position: fixed;
-  top: 60px;
+  position: fixed;
+  top: 80px;
   left: 0;
   width: 100%;
   z-index: 1000;
-
+  background: white;
   .buttonJobTypeMenu {
     position: relative;
     display: inline-block;

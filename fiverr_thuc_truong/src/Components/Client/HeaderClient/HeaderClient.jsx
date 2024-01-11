@@ -13,11 +13,12 @@ import {
   Typography,
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getListJobByName } from '../../../API/jobAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
 import {
   Search,
   SearchIconWrapper,
@@ -26,6 +27,8 @@ import {
 
 const HeaderClient = () => {
   const [search, setSearch] = useState('');
+  const [sticky, setSticky] = useState(false);
+  const media = useMediaQuery('(min-width: 768px)');
 
   const { isLoading, data: jobs = [] } = useQuery({
     queryKey: ['jobs', search],
@@ -37,18 +40,36 @@ const HeaderClient = () => {
 
   const { currentUser, handleLogOut } = useAuth();
   console.log('currentUser: ', currentUser);
+
+  useEffect(() => {
+    window.addEventListener('scroll', isSticky);
+    return () => {
+      window.removeEventListener('scroll', isSticky);
+    };
+  });
+
+  /* Method that will fix header after a specific scrollable */
+  const isSticky = (e) => {
+    const header = document.querySelector('.header-section');
+    const scrollTop = window.scrollY;
+    scrollTop >= 100
+      ? header.classList.add('is-sticky') & setSticky(true)
+      : header.classList.remove('is-sticky') & setSticky(false);
+  };
   return (
-    <Box className="header-container" sx={{ flexGrow: 1 }}>
+    <Box className="header-section header-container " sx={{ flexGrow: 1 }}>
       <Toolbar className="header-toolbar">
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        >
-          <MenuIcon />
-        </IconButton>
+        {!media && (
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            sx={{ mr: 2, color: sticky ? '#333' : 'white' }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}{' '}
         <Typography
           variant="h6"
           component="div"
@@ -58,12 +79,12 @@ const HeaderClient = () => {
           }}
         >
           <img
-            src="./Image/logoFiverr.jpg"
+            src={sticky ? '/Image/logoFiverr.jpg' : '/Image/logo.svg'}
             alt=""
             style={{ width: 100, cursor: 'pointer' }}
           />
         </Typography>
-        <Search>
+        <Search sx={{ bgcolor: !sticky && 'white' }}>
           <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
@@ -136,6 +157,10 @@ const HeaderClient = () => {
           <Stack spacing={1} direction={'row'}>
             <Button
               variant="outlined"
+              sx={{
+                borderColor: !sticky ? 'white' : 'black',
+                color: !sticky ? 'white' : 'black',
+              }}
               onClick={() => {
                 navigate(PATH.SIGNUP);
               }}
@@ -144,6 +169,7 @@ const HeaderClient = () => {
             </Button>
             <Button
               variant="contained"
+              color="success"
               onClick={() => {
                 navigate(PATH.SIGNIN);
               }}

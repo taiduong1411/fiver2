@@ -4,7 +4,10 @@ const Sevices = () => {
   const CustomNextArrow = (props) => (
     <div
       {...props}
-      style={{ ...props.style, display: 'block', background: 'red' }}
+      style={{
+        ...props.style,
+        display: 'block',
+      }}
     />
   );
 
@@ -12,7 +15,10 @@ const Sevices = () => {
   const CustomPrevArrow = (props) => (
     <div
       {...props}
-      style={{ ...props.style, display: 'block', background: 'green' }}
+      style={{
+        ...props.style,
+        display: 'block',
+      }}
     />
   );
   var settings = {
