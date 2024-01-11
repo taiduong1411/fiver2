@@ -3,18 +3,12 @@ import Slider from 'react-slick';
 
 const Testimonial = () => {
   const CustomNextArrow = (props) => (
-    <div
-      {...props}
-      style={{ ...props.style, display: 'block', background: 'red' }}
-    />
+    <div {...props} style={{ ...props.style, display: 'block' }} />
   );
 
   // Component nút chuyển lại tùy chỉnh
   const CustomPrevArrow = (props) => (
-    <div
-      {...props}
-      style={{ ...props.style, display: 'block', background: 'green' }}
-    />
+    <div {...props} style={{ ...props.style, display: 'block' }} />
   );
   const settings = {
     dots: true,
