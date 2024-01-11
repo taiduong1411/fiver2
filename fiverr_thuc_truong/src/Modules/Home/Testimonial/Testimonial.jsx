@@ -1,5 +1,6 @@
 import { Box, Grid, Modal, Typography } from '@mui/material';
 import React from 'react';
+import ReactPlayer from 'react-player';
 import Slider from 'react-slick';
 
 const style = {
@@ -7,11 +8,11 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 1025,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  width: '80%',
+  p: 0,
 };
 const Testimonial = () => {
   const [open, setOpen] = React.useState(false);
@@ -74,15 +75,15 @@ const Testimonial = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Text in a modal
-              </Typography>
-              <video
-                src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/yja2ld5fnolhsixj3xxw"
-                preload="auto"
-                autoPlay={true}
-                style="width: 100%; height: auto;"
-              ></video>
+              <div className="video-selling">
+                <ReactPlayer
+                  url="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/yja2ld5fnolhsixj3xxw"
+                  width="100%"
+                  height="auto"
+                  playing={true}
+                  controls={false}
+                />
+              </div>
             </Box>
           </Modal>
         </Box>
@@ -90,7 +91,11 @@ const Testimonial = () => {
         <Box>
           <Grid container spacing={2}>
             <Grid item xs={12} md={5} position={'relative'}>
-              <button type="button" className="modal-btn  btn btn-none">
+              <button
+                onClick={handleOpen}
+                type="button"
+                className="modal-btn  btn btn-none"
+              >
                 <img
                   width={500}
                   src="https://demo5.cybersoft.edu.vn/img/testimonial1.png"

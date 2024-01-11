@@ -14,13 +14,8 @@ import { signInAPI } from '../../../API/userAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { useHeaderStore } from '../../../store/useHeaderStore';
 
 const SignIn = () => {
-  const { sticky, setSticky } = useHeaderStore();
-  if (!sticky) {
-    setSticky();
-  }
   const { handleSignIn: handleSignInContext, currentUser } = useAuth();
   const navigate = useNavigate();
 

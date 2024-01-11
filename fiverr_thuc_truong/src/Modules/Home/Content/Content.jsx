@@ -1,7 +1,24 @@
+import { Box, Modal } from '@mui/material';
+import React from 'react';
+import ReactPlayer from 'react-player';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  width: '80%',
+  p: 0,
+};
 const Content = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div className="container-content">
       <div className="sub-container">
@@ -141,9 +158,32 @@ const Content = () => {
           </p>
         </div>
         <div className="right" style={{ position: 'relative' }}>
-          <button type="button" className="modal-btn  btn btn-none">
+          <button
+            onClick={handleOpen}
+            type="button"
+            className="modal-btn  btn btn-none"
+          >
             <img className="modal-img" src="./Image/selling.png" alt="..." />
           </button>
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <div className="video-selling">
+                <ReactPlayer
+                  url="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/vmvv3czyk2ifedefkau7"
+                  width="100%"
+                  height="auto"
+                  playing={true}
+                  controls={false}
+                />
+              </div>
+            </Box>
+          </Modal>
         </div>
       </div>
     </div>

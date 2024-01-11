@@ -21,7 +21,6 @@ import { signUpAPI } from '../../../API/userAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { useHeaderStore } from '../../../store/useHeaderStore';
 // Error
 const schemaSignUp = yup.object({
   name: yup
@@ -57,10 +56,6 @@ const schemaSignUp = yup.object({
   certification: yup.string().required('You cannot leave this field blank'),
 });
 const SignUp = () => {
-  const { sticky, setSticky } = useHeaderStore();
-  if (!sticky) {
-    setSticky();
-  }
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const {

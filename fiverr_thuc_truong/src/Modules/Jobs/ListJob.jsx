@@ -32,7 +32,7 @@ function ListJob() {
       <Box sx={{ mt: 15, mx: 5 }}>
         {searchQuery && (
           <Typography variant="h4" my={5}>
-            Results for {searchQuery}
+            Results for "{searchQuery}"
           </Typography>
         )}
         <FilterBar />
