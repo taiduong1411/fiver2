@@ -15,7 +15,7 @@ import { getListJobByName } from '../../../API/jobAPI';
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
 
 const CarouselItem = () => {
-  const matches = useMediaQuery('(min-width: 768px)');
+  const matches = useMediaQuery('(min-width: 650px)');
   const [search, setSearch] = useState('');
   const handleSearch = (e) => setSearch(e.target.value);
 
@@ -43,7 +43,6 @@ const CarouselItem = () => {
         sx={{
           height: '40px',
           minWidth: matches ? '500px' : '300px',
-          mx: 5,
           my: !matches ? 2 : 5,
           display: 'flex',
           flexDirection: matches ? 'row' : 'column',
@@ -64,14 +63,16 @@ const CarouselItem = () => {
           flexWrap={'wrap'}
         />
 
-        <Button
-          variant="contained"
-          color="success"
-          sx={{ height: '100%', borderRadius: '0' }}
-          type="submit"
-        >
-          Search
-        </Button>
+        {matches && (
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ height: '100%', borderRadius: '0' }}
+            type="submit"
+          >
+            Search
+          </Button>
+        )}
 
         <Box zIndex={1} position={'absolute'} minWidth={400} bgcolor={'white'}>
           {isLoading ? (

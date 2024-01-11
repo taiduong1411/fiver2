@@ -1,11 +1,25 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Modal, Typography } from '@mui/material';
+import React from 'react';
 import Slider from 'react-slick';
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 1025,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 const Testimonial = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const CustomNextArrow = (props) => (
     <div {...props} style={{ ...props.style, display: 'block' }} />
   );
-
   // Component nút chuyển lại tùy chỉnh
   const CustomPrevArrow = (props) => (
     <div {...props} style={{ ...props.style, display: 'block' }} />
@@ -25,12 +39,18 @@ const Testimonial = () => {
       <Slider {...settings}>
         <Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={5}>
-              <img
-                width={500}
-                src="https://demo5.cybersoft.edu.vn/img/testimonial1.png"
-                alt=""
-              />
+            <Grid item xs={12} md={5} position={'relative'}>
+              <button
+                onClick={handleOpen}
+                type="button"
+                className="modal-btn  btn btn-none"
+              >
+                <img
+                  width={500}
+                  src="https://demo5.cybersoft.edu.vn/img/testimonial1.png"
+                  alt=""
+                />
+              </button>
             </Grid>
             <Grid item xs={12} md={7}>
               <Typography variant="h5">
@@ -46,16 +66,37 @@ const Testimonial = () => {
               </Typography>
             </Grid>
           </Grid>
+
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Text in a modal
+              </Typography>
+              <video
+                src="https://fiverr-res.cloudinary.com/video/upload/t_fiverr_hd/yja2ld5fnolhsixj3xxw"
+                preload="auto"
+                autoPlay={true}
+                style="width: 100%; height: auto;"
+              ></video>
+            </Box>
+          </Modal>
         </Box>
 
         <Box>
           <Grid container spacing={2}>
-            <Grid item xs={12} md={5}>
-              <img
-                width={500}
-                src="https://demo5.cybersoft.edu.vn/img/testimonial1.png"
-                alt=""
-              />
+            <Grid item xs={12} md={5} position={'relative'}>
+              <button type="button" className="modal-btn  btn btn-none">
+                <img
+                  width={500}
+                  src="https://demo5.cybersoft.edu.vn/img/testimonial1.png"
+                  alt=""
+                />
+              </button>
             </Grid>
             <Grid item xs={12} md={7}>
               <Typography variant="h5">

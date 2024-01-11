@@ -1,14 +1,18 @@
-import { Search as SearchIcon } from '@mui/icons-material';
+import { Close, Search as SearchIcon } from '@mui/icons-material';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
   Avatar,
   Box,
   Button,
+  Divider,
   IconButton,
+  List,
   ListItem,
   ListItemAvatar,
+  ListItemButton,
   ListItemText,
   Stack,
+  SwipeableDrawer,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -28,6 +32,7 @@ import {
 
 const HeaderClient = () => {
   const [search, setSearch] = useState('');
+  const [open, setOpen] = useState(false);
   const { sticky, setSticky, setUnSticky, setSearchQuery } = useHeaderStore();
 
   const media = useMediaQuery('(min-width: 768px)');
@@ -62,6 +67,64 @@ const HeaderClient = () => {
     const scrollTop = window.scrollY;
     scrollTop >= 100 ? setSticky() : setUnSticky();
   };
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setOpen(open);
+  };
+
+  const list = () => (
+    <Box
+      role="presentation"
+      sx={{
+        p: '1rem',
+        maxWidth: '100%',
+        minWidth: 300,
+      }}
+      onKeyDown={toggleDrawer(false)}
+    >
+      <List>
+        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Link to="/sign-in">
+            <Button variant="contained" color="success">
+              Sign In
+            </Button>
+          </Link>
+
+          <IconButton onClick={() => setOpen(!open)}>
+            <Close />
+          </IconButton>
+        </ListItem>
+
+        {['Fiverr Pro', 'Explore', 'Messages', 'List', 'Order'].map((text) => (
+          <>
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemText
+                  sx={{
+                    color: '#62646a',
+                    fontSize: '32px',
+                    fontWeight: '600',
+                    marginBottom: '16px',
+                  }}
+                  primary={text}
+                />
+              </ListItemButton>
+            </ListItem>
+            <Divider />
+          </>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <Box
       className={`header-section header-container ${sticky ? 'is-sticky' : ''}`}
@@ -70,6 +133,7 @@ const HeaderClient = () => {
       <Toolbar className="header-toolbar">
         {!media && (
           <IconButton
+            onClick={() => setOpen(!open)}
             size="large"
             edge="start"
             color="inherit"
@@ -79,6 +143,15 @@ const HeaderClient = () => {
             <MenuIcon />
           </IconButton>
         )}{' '}
+        <SwipeableDrawer
+          anchor={'left'}
+          open={open}
+          onClose={toggleDrawer(false)}
+          onOpen={toggleDrawer(true)}
+          swipeAreaWidth={50}
+        >
+          {list()}
+        </SwipeableDrawer>
         <Typography
           variant="h6"
           component="div"
