@@ -11,7 +11,7 @@ import JobCard from './JobCard/JobCard';
 
 function ListJob() {
   const media = useMediaQuery('(min-width: 768px)');
-  const { sticky, setSticky } = useHeaderStore();
+  const { sticky, setSticky, searchQuery } = useHeaderStore();
   if (!sticky) {
     setSticky();
   }
@@ -31,7 +31,7 @@ function ListJob() {
 
       <Box sx={{ mt: 25, mx: 5 }}>
         <Typography variant="h4" my={5}>
-          Results for Hi{' '}
+          Results for {searchQuery ? searchQuery : ''}
         </Typography>
         <FilterBar />
         <Typography variant="subtitle1" my={5}>

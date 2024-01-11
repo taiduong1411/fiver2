@@ -5,7 +5,7 @@ const FooterClient = () => {
   return (
     <div className="container">
       <Divider />
-      <footer className="footer">
+      <footer className="footer " style={{ marginTop: 50 }}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={3}>
             <Typography fontWeight="bold" variant="h6">

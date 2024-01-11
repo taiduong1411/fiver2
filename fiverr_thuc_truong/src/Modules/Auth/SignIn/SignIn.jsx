@@ -13,8 +13,14 @@ import { useNavigate } from 'react-router-dom';
 import { signInAPI } from '../../../API/userAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useHeaderStore } from '../../../store/useHeaderStore';
 
 const SignIn = () => {
+  const { sticky, setSticky } = useHeaderStore();
+  if (!sticky) {
+    setSticky();
+  }
   const { handleSignIn: handleSignInContext, currentUser } = useAuth();
   const navigate = useNavigate();
 
@@ -46,6 +52,7 @@ const SignIn = () => {
   const onSubmit = (formValue) => {
     handleSignin(formValue);
   };
+  const media = useMediaQuery('(min-width: 768px)');
 
   return (
     <Container
@@ -55,7 +62,7 @@ const SignIn = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100vh',
+        height: media ? '100vh' : '500px',
       }}
     >
       <Box>

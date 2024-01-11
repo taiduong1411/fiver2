@@ -20,6 +20,8 @@ import * as yup from 'yup';
 import { signUpAPI } from '../../../API/userAPI';
 import { useAuth } from '../../../Contexts/useContext/useContext';
 import { PATH } from '../../../Routes/path';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { useHeaderStore } from '../../../store/useHeaderStore';
 // Error
 const schemaSignUp = yup.object({
   name: yup
@@ -55,6 +57,10 @@ const schemaSignUp = yup.object({
   certification: yup.string().required('You cannot leave this field blank'),
 });
 const SignUp = () => {
+  const { sticky, setSticky } = useHeaderStore();
+  if (!sticky) {
+    setSticky();
+  }
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const {
@@ -110,9 +116,13 @@ const SignUp = () => {
     console.log('Data:', transformedData);
     handleSignUp(transformedData);
   };
+
   if (currentUser) {
     return <Navigate to={PATH.HOME} />;
   }
+
+  const media = useMediaQuery('(min-width: 768px)');
+
   return (
     <Container
       maxWidth="sm"
@@ -121,7 +131,7 @@ const SignUp = () => {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '130vh',
+        height: media ? '130vh' : '900px',
       }}
     >
       <Typography variant="h5" textAlign={'center'} mb={2}>

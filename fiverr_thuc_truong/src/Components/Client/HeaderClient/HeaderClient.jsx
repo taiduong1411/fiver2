@@ -28,7 +28,7 @@ import {
 
 const HeaderClient = () => {
   const [search, setSearch] = useState('');
-  const { sticky, setSticky, setUnSticky } = useHeaderStore();
+  const { sticky, setSticky, setUnSticky, setSearchQuery } = useHeaderStore();
 
   const media = useMediaQuery('(min-width: 768px)');
 
@@ -38,7 +38,14 @@ const HeaderClient = () => {
   });
   const navigate = useNavigate();
 
-  const handleSearch = (e) => setSearch(e.target.value);
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const handleAfterSearch = () => {
+    setSearchQuery(search);
+    setSearch('');
+  };
 
   const { currentUser, handleLogOut } = useAuth();
   console.log('currentUser: ', currentUser);
@@ -107,7 +114,7 @@ const HeaderClient = () => {
                 <Link
                   key={job.id}
                   to={'jobs/' + job.id}
-                  onClick={handleSearch}
+                  onClick={handleAfterSearch}
                   style={{ textDecoration: 'none' }}
                 >
                   <ListItem alignItems="flex-start">
@@ -160,6 +167,7 @@ const HeaderClient = () => {
             <Button
               variant="outlined"
               sx={{
+                fontSize: media ? '16px' : '8px',
                 textTransform: 'capitalize',
                 borderColor: !sticky ? 'white' : 'black',
                 color: !sticky ? 'white' : 'black',
@@ -174,6 +182,7 @@ const HeaderClient = () => {
               variant="contained"
               color="success"
               sx={{
+                fontSize: media ? '16px' : '8px',
                 textTransform: 'capitalize',
               }}
               onClick={() => {
