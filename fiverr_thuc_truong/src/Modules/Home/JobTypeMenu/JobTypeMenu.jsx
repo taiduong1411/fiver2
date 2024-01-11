@@ -1,12 +1,13 @@
 // JobTypeMenu.jsx
-import React, { useState } from "react";
-import { Box, Button, Grid, MenuItem } from "@mui/material";
-import { QueryClient, useQuery } from "@tanstack/react-query";
-import { getJobTypeMenuAPI } from "../../../API/jobAPI";
+import { Box, Button, Grid, MenuItem } from '@mui/material';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getJobTypeMenuAPI } from '../../../API/jobAPI';
 
 const JobTypeMenu = () => {
   const { data: dataJobTypeMenu = [] } = useQuery({
-    queryKey: ["job-type-menu"],
+    queryKey: ['job-type-menu'],
     queryFn: getJobTypeMenuAPI,
   });
 
@@ -27,7 +28,7 @@ const JobTypeMenu = () => {
             onMouseEnter={() => handleButtonHover(item.dsNhomChiTietLoai)}
             // onMouseLeave={() => handleButtonHover(null)}
           >
-            <Button>{item.tenLoaiCongViec}</Button>
+            <Button color="primary">{item.tenLoaiCongViec}</Button>
             {hoveredItem === item.dsNhomChiTietLoai && (
               <Box className="menuItemJobType">
                 {item.dsNhomChiTietLoai.map((group) => (
@@ -35,7 +36,9 @@ const JobTypeMenu = () => {
                     <h4>{group.tenNhom}</h4>
                     <ul>
                       {group.dsChiTietLoai.map((detail) => (
-                        <MenuItem key={detail.id}>{detail.tenChiTiet}</MenuItem>
+                        <Link key={detail.id} to={detail.id}>
+                          <MenuItem>{detail.tenChiTiet}</MenuItem>
+                        </Link>
                       ))}
                     </ul>
                   </div>

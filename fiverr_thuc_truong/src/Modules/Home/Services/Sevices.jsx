@@ -1,6 +1,4 @@
-import React from "react";
 import Slider from "react-slick";
-
 const Sevices = () => {
   // Component nút chuyển qua tùy chỉnh
   const CustomNextArrow = (props) => (
@@ -55,9 +53,9 @@ const Sevices = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h2> Multiple items </h2>
+    <div className="container">
+      <div className="list-jobs">
+        <h2> Popular professional services </h2>
         <Slider {...settings}>
           <div>
             <h3>

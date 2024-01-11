@@ -9,7 +9,7 @@ const ClientLayout = () => {
     <Box>
       <HeaderClient />
       <Outlet />
-      <FooterClient />
+      {/* <FooterClient /> */}
     </Box>
   );
 };

@@ -1,8 +1,8 @@
-import { Box } from "@mui/material";
-import React from "react";
-import Carousel from "./Carousel";
-import JobTypeMenu from "./JobTypeMenu";
-import Services from "./Services";
+import { Box } from '@mui/material';
+import Carousel from './Carousel';
+import Content from './Content/Content';
+import JobTypeMenu from './JobTypeMenu';
+import Services from './Services';
 
 const Home = () => {
   return (
@@ -10,6 +10,7 @@ const Home = () => {
       <JobTypeMenu />
       <Carousel />
       <Services />
+      <Content />
     </Box>
   );
 };

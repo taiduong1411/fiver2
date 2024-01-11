@@ -53,9 +53,9 @@
   background-color: white;
   padding: 8px;
 }
-.jobTypeMenu .buttonJobTypeMenu Button {
-  color: white;
-}
+/* .jobTypeMenu .buttonJobTypeMenu Button {
+  color: #333;
+} */
 .jobTypeMenu h4 {
   color: #333;
   margin-bottom: 8px;
@@ -75,6 +75,7 @@
   background-color: transparent;
   color: white;
   z-index: 1001;
+  /* display: none; */
 }
 
 .header-toolbar {
@@ -88,4 +89,4 @@
   height: 300px;
   display: flex;
   align-items: center;
-}/*# sourceMappingURL=main.css.map */
+} /*# sourceMappingURL=main.css.map */
