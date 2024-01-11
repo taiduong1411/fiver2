@@ -36,6 +36,7 @@ const HeaderClient = () => {
   const { sticky, setSticky, setUnSticky, setSearchQuery } = useHeaderStore();
 
   const media = useMediaQuery('(min-width: 768px)');
+  const mobile = useMediaQuery('(max-width: 650px)');
 
   const { isLoading, data: jobs = [] } = useQuery({
     queryKey: ['jobs', search],
@@ -91,7 +92,9 @@ const HeaderClient = () => {
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ListItem
+          sx={{ my: 2, display: 'flex', justifyContent: 'space-between' }}
+        >
           <Link to="/sign-in">
             <Button variant="contained" color="success">
               Sign In
@@ -138,17 +141,16 @@ const HeaderClient = () => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2, color: sticky ? '#333' : 'white' }}
+            sx={{ mx: 1, color: sticky ? '#333' : 'white' }}
           >
             <MenuIcon />
           </IconButton>
-        )}{' '}
+        )}
         <SwipeableDrawer
           anchor={'left'}
           open={open}
           onClose={toggleDrawer(false)}
           onOpen={toggleDrawer(true)}
-          swipeAreaWidth={50}
         >
           {list()}
         </SwipeableDrawer>
@@ -237,33 +239,37 @@ const HeaderClient = () => {
           </Stack>
         ) : (
           <Stack spacing={1} direction={'row'}>
-            <Button
-              variant="outlined"
-              sx={{
-                fontSize: media ? '16px' : '8px',
-                textTransform: 'capitalize',
-                borderColor: !sticky ? 'white' : 'black',
-                color: !sticky ? 'white' : 'black',
-              }}
-              onClick={() => {
-                navigate(PATH.SIGNUP);
-              }}
-            >
-              Sign Up
-            </Button>
-            <Button
-              variant="contained"
-              color="success"
-              sx={{
-                fontSize: media ? '16px' : '8px',
-                textTransform: 'capitalize',
-              }}
-              onClick={() => {
-                navigate(PATH.SIGNIN);
-              }}
-            >
-              Sign In
-            </Button>
+            {!mobile && (
+              <>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    fontSize: media ? '16px' : '14px',
+                    textTransform: 'capitalize',
+                    borderColor: !sticky ? 'white' : 'black',
+                    color: !sticky ? 'white' : 'black',
+                  }}
+                  onClick={() => {
+                    navigate(PATH.SIGNUP);
+                  }}
+                >
+                  Sign Up
+                </Button>
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{
+                    fontSize: media ? '16px' : '14px',
+                    textTransform: 'capitalize',
+                  }}
+                  onClick={() => {
+                    navigate(PATH.SIGNIN);
+                  }}
+                >
+                  Sign In
+                </Button>
+              </>
+            )}
           </Stack>
         )}
       </Toolbar>
