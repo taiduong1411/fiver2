@@ -1,9 +1,9 @@
-import fetcher from "./fetcher";
+import fetcher from './fetcher';
 
 // API lấy menu loại công việc
 const getJobTypeMenuAPI = async () => {
   try {
-    const response = await fetcher.get("/cong-viec/lay-menu-loai-cong-viec");
+    const response = await fetcher.get('/cong-viec/lay-menu-loai-cong-viec');
     return response.data.content;
   } catch (error) {
     console.log(`FE Error:${error}`);
@@ -14,7 +14,7 @@ const getJobTypeMenuAPI = async () => {
 const getListJobByName = async (nameJob) => {
   try {
     const response = await fetcher.get(
-      "/cong-viec/lay-danh-sach-cong-viec-theo-ten/%22I%20will%20write%20simple%202and%20interesting%20content%20for%20your%20website%22",
+      '/cong-viec/lay-danh-sach-cong-viec-theo-ten/%22I%20will%20write%20simple%202and%20interesting%20content%20for%20your%20website%22',
       nameJob
     );
     return response.data.content;
@@ -26,8 +26,7 @@ const getListJobByName = async (nameJob) => {
 const getJobByTypeDetails = async (maChiTietLoai) => {
   try {
     const response = await fetcher.get(
-      "/cong-viec/lay-cong-viec-theo-chi-tiet-loai",
-      maChiTietLoai
+      `/cong-viec/lay-cong-viec-theo-chi-tiet-loai/${maChiTietLoai}`
     );
     return response.data.content;
   } catch (error) {
@@ -39,8 +38,8 @@ const getJobByTypeDetails = async (maChiTietLoai) => {
 const layChiTietLoaiCongViec = async (maLoaiCongViec) => {
   try {
     const response = await fetcher.get(
-      "/cong-viec/lay-menu-loai-cong-viec",
-      maLoaiCongViec
+      '/cong-viec/lay-menu-loai-cong-viec',
+      maLoaiCongViec.id
     );
     return response.data.content;
   } catch (error) {
@@ -52,7 +51,7 @@ const layChiTietLoaiCongViec = async (maLoaiCongViec) => {
 const layCongViecChiTiet = async (maCongViec) => {
   try {
     const response = await fetcher.get(
-      "/cong-viec/lay-cong-viec-chi-tiet",
+      '/cong-viec/lay-cong-viec-chi-tiet',
       maCongViec
     );
     return response.data.content;
@@ -61,9 +60,9 @@ const layCongViecChiTiet = async (maCongViec) => {
   }
 };
 export {
+  getJobByTypeDetails,
   getJobTypeMenuAPI,
   getListJobByName,
-  getJobByTypeDetails,
   layChiTietLoaiCongViec,
   layCongViecChiTiet,
 };

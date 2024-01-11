@@ -1,8 +1,7 @@
 // JobTypeMenu.jsx
-import { Box, Button, Grid, MenuItem } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { getJobTypeMenuAPI } from '../../../API/jobAPI';
 
 const JobTypeMenu = () => {
@@ -29,20 +28,41 @@ const JobTypeMenu = () => {
             // onMouseLeave={() => handleButtonHover(null)}
           >
             <Button color="primary">{item.tenLoaiCongViec}</Button>
-            {hoveredItem === item.dsNhomChiTietLoai && (
+            {/* {hoveredItem === item.dsNhomChiTietLoai && (
               <Box className="menuItemJobType">
-                {item.dsNhomChiTietLoai.map((group) => (
-                  <div key={group.id}>
-                    <h4>{group.tenNhom}</h4>
-                    <ul>
-                      {group.dsChiTietLoai.map((detail) => (
-                        <Link key={detail.id} to={detail.id}>
-                          <MenuItem>{detail.tenChiTiet}</MenuItem>
-                        </Link>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                {item.dsNhomChiTietLoai.map((group) => {
+                  console.log(item.dsNhomChiTietLoai);
+                  return (
+                    <div key={group.id}>
+                      <h4>{group.tenNhom}</h4>
+                      <ul>
+                        {group.dsChiTietLoai.map((detail) => (
+                          <Link key={detail.id} to={'/jobs/' + detail.id}>
+                            <MenuItem>{detail.tenChiTiet}</MenuItem>
+                          </Link>
+                        ))}
+                      </ul>
+                    </div>
+                  );
+                })}
+              </Box>
+            )} */}
+            {item.dsNhomChiTietLoai && (
+              <Box className="menuItemJobType">
+                {item.dsNhomChiTietLoai.map((group) => {
+                  return (
+                    <Box p={200} key={group.id}>
+                      <Typography>{group.tenNhom}</Typography>
+                      {/* <ul>
+                        {group.dsChiTietLoai.map((detail) => (
+                          <Link key={detail.id} to={'/jobs/' + detail.id}>
+                            <MenuItem>{detail.tenChiTiet}</MenuItem>
+                          </Link>
+                        ))}
+                      </ul> */}
+                    </Box>
+                  );
+                })}
               </Box>
             )}
           </Grid>

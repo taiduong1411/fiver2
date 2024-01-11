@@ -1,5 +1,4 @@
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../../Contexts/useContext/useContext";
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   Box,
   Button,
@@ -7,14 +6,15 @@ import {
   Stack,
   Toolbar,
   Typography,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { PATH } from "../../../Routes/path";
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../../Contexts/useContext/useContext';
+import { PATH } from '../../../Routes/path';
 
 const HeaderClient = () => {
   const navigate = useNavigate();
   const { currentUser, handleLogOut } = useAuth();
-  console.log("currentUser: ", currentUser);
+  console.log('currentUser: ', currentUser);
   return (
     <Box className="header-container" sx={{ flexGrow: 1 }}>
       <Toolbar className="header-toolbar">
@@ -38,16 +38,16 @@ const HeaderClient = () => {
           <img
             src="./Image/logoFiverr.jpg"
             alt=""
-            style={{ width: 100, height: 100, cursor: "pointer" }}
+            style={{ width: 100, height: 100, cursor: 'pointer' }}
           />
         </Typography>
 
         {currentUser ? (
           <Stack
             spacing={2}
-            direction={"row"}
-            textAlign={"center"}
-            alignItems={"center"}
+            direction={'row'}
+            textAlign={'center'}
+            alignItems={'center'}
           >
             <Typography>{currentUser.user.name}</Typography>
             <Button
@@ -62,7 +62,7 @@ const HeaderClient = () => {
             </Button>
           </Stack>
         ) : (
-          <Stack spacing={1} direction={"row"}>
+          <Stack spacing={1} direction={'row'}>
             <Button
               variant="outlined"
               onClick={() => {
