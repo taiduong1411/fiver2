@@ -4,6 +4,7 @@ import Content from './Content/Content';
 import JobTypeMenu from './JobTypeMenu';
 import MainCategory from './MainCategory/MainCategory';
 import Services from './Services';
+import Testimonial from './Testimonial/Testimonial';
 
 const Home = () => {
   return (
@@ -12,6 +13,7 @@ const Home = () => {
       <Carousel />
       <Services />
       <Content />
+      <Testimonial />
       <MainCategory />
     </Box>
   );
