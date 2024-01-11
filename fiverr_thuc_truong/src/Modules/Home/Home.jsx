@@ -25,7 +25,7 @@ const Home = () => {
   };
   return (
     <Box>
-      {media && sticky && <JobTypeMenu />}
+      {media && sticky && <JobTypeMenu fixed={true} />}
       <Carousel />
       <Services />
       <Content />

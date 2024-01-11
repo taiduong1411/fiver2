@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getJobTypeMenuAPI } from '../../../API/jobAPI';
 
-const JobTypeMenu = () => {
+const JobTypeMenu = ({ fixed }) => {
   const { data: dataJobTypeMenu = [] } = useQuery({
     queryKey: ['job-type-menu'],
     queryFn: getJobTypeMenuAPI,
@@ -18,7 +18,13 @@ const JobTypeMenu = () => {
   };
 
   return (
-    <div className="jobTypeMenu">
+    <div
+      className="jobTypeMenu"
+      style={{
+        position: fixed ? 'fixed' : 'relative',
+        marginTop: !fixed && 50,
+      }}
+    >
       <Grid container spacing={2}>
         {dataJobTypeMenu.map((item) => (
           <Grid

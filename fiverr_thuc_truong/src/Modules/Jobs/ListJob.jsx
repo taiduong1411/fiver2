@@ -27,9 +27,9 @@ function ListJob() {
 
   return (
     <>
-      {media && <JobTypeMenu />}
+      {media && <JobTypeMenu fixed={false} />}
 
-      <Box sx={{ mt: 25, mx: 5 }}>
+      <Box sx={{ mt: 15, mx: 5 }}>
         {searchQuery && (
           <Typography variant="h4" my={5}>
             Results for {searchQuery}
