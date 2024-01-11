@@ -14,8 +14,7 @@ const getJobTypeMenuAPI = async () => {
 const getListJobByName = async (nameJob) => {
   try {
     const response = await fetcher.get(
-      '/cong-viec/lay-danh-sach-cong-viec-theo-ten/%22I%20will%20write%20simple%202and%20interesting%20content%20for%20your%20website%22',
-      nameJob
+      `/cong-viec/lay-danh-sach-cong-viec-theo-ten/${nameJob}`
     );
     return response.data.content;
   } catch (error) {

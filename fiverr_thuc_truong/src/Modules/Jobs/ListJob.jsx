@@ -7,18 +7,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getJobByTypeDetails } from '../../API/jobAPI';
+import JobTypeMenu from '../Home/JobTypeMenu/JobTypeMenu';
 import FilterBar from './Filter/FilterBar';
 
 function ListJob() {
   let { id } = useParams();
 
-  const {
-    isLoading,
-    error,
-    data: jobItems = [],
-  } = useQuery({
+  const { isLoading, data: jobItems = [] } = useQuery({
     queryKey: ['job-details', id],
     queryFn: () => getJobByTypeDetails(id),
   });
@@ -28,78 +25,85 @@ function ListJob() {
   }
 
   return (
-    <Box sx={{ mt: 20, mx: 10 }}>
-      <FilterBar />
+    <>
+      <JobTypeMenu />
+      <Box sx={{ mt: 5, mx: 5 }}>
+        <FilterBar />
 
-      <Grid container spacing={3}>
-        {!isLoading &&
-          jobItems.map((item) => (
-            <Grid key={item.id} item xs={12} md={3}>
-              <Card sx={{ flexGrow: 1 }}>
-                <CardMedia
-                  sx={{ height: 200 }}
-                  image={item.congViec.hinhAnh}
-                  title="green iguana"
-                />
-                <CardContent>
-                  <Box
-                    display={'flex'}
-                    justifyContent={'left'}
-                    alignItems={'center'}
-                    gap={2}
-                  >
-                    <Box>
-                      <Avatar
-                        alt={item.congViec.nguoiTao}
-                        src={item.congViec.hinhAnh}
-                      />
-                    </Box>
-                    <Box>
-                      <Typography variant="subtitle1" component="div">
-                        {item.congViec.nguoiTao}
+        <Grid container spacing={3}>
+          {!isLoading &&
+            jobItems.map((item) => (
+              <Grid key={item.id} item xs={12} md={3}>
+                <Link to={''}>
+                  <Card sx={{ flexGrow: 1 }}>
+                    <CardMedia
+                      sx={{ height: 200 }}
+                      image={item.congViec.hinhAnh}
+                      title="green iguana"
+                    />
+                    <CardContent>
+                      <Box
+                        display={'flex'}
+                        justifyContent={'left'}
+                        alignItems={'center'}
+                        gap={2}
+                      >
+                        <Box>
+                          <Avatar
+                            alt={item.congViec.nguoiTao}
+                            src={item.congViec.hinhAnh}
+                          />
+                        </Box>
+                        <Box>
+                          <Typography variant="subtitle1" component="div">
+                            {item.congViec.nguoiTao}
+                          </Typography>
+                        </Box>
+                      </Box>
+
+                      <Typography variant="body2" color="text.secondary">
+                        {item.congViec.tenCongViec}
                       </Typography>
-                    </Box>
-                  </Box>
 
-                  <Typography variant="body2" color="text.secondary">
-                    {item.congViec.tenCongViec}
-                  </Typography>
-
-                  <Box display={'flex'}>
-                    <StarIcon style={{ color: '#ffbe5b' }} />
-                    <Typography>
-                      <span style={{ color: '#ffbe5b', fontWeight: 'bold' }}>
-                        {item.congViec.saoCongViec}
-                      </span>
-                      <span> ({item.congViec.danhGia})</span>
-                    </Typography>
-                  </Box>
-                </CardContent>
-                <Divider />
-                <CardActions
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <IconButton
-                    aria-label="add to favorites"
-                    sx={{ ':hover': { color: 'red ' } }}
-                  >
-                    <Favorite />
-                  </IconButton>
-                  <Box display={'inline-block'}>
-                    <Typography variant="body1">
-                      Starting At
-                      <strong> US${item.congViec.giaTien}</strong>
-                    </Typography>
-                  </Box>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-      </Grid>
-    </Box>
+                      <Box display={'flex'}>
+                        <StarIcon style={{ color: '#ffbe5b' }} />
+                        <Typography>
+                          <span
+                            style={{ color: '#ffbe5b', fontWeight: 'bold' }}
+                          >
+                            {item.congViec.saoCongViec}
+                          </span>
+                          <span> ({item.congViec.danhGia})</span>
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                    <Divider />
+                    <CardActions
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <IconButton
+                        aria-label="add to favorites"
+                        sx={{ ':hover': { color: 'red ' } }}
+                      >
+                        <Favorite />
+                      </IconButton>
+                      <Box display={'inline-block'}>
+                        <Typography variant="body1">
+                          Starting At
+                          <strong> US${item.congViec.giaTien}</strong>
+                        </Typography>
+                      </Box>
+                    </CardActions>
+                  </Card>
+                </Link>
+              </Grid>
+            ))}
+        </Grid>
+      </Box>
+    </>
   );
 }
 
