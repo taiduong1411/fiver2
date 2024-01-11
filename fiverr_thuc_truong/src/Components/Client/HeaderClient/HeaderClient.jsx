@@ -31,12 +31,9 @@ const HeaderClient = () => {
     queryKey: ['jobs', search],
     queryFn: () => getListJobByName(search),
   });
-  const handleSearch = (e) => setSearch(e.target.value);
   const navigate = useNavigate();
 
-  const handleAfterSearch = () => {
-    setSearch('');
-  };
+  const handleSearch = (e) => setSearch(e.target.value);
 
   const { currentUser, handleLogOut } = useAuth();
   console.log('currentUser: ', currentUser);
@@ -79,13 +76,15 @@ const HeaderClient = () => {
 
           <Box position={'absolute'} minWidth={400} bgcolor={'white'}>
             {isLoading ? (
-              <p>Loading</p>
+              <ListItem alignItems="flex-start">
+                <p>Loading ....</p>
+              </ListItem>
             ) : (
               jobs.map((job) => (
                 <Link
                   key={job.id}
                   to={'jobs/' + job.id}
-                  onClick={handleAfterSearch}
+                  onClick={handleSearch}
                   style={{ textDecoration: 'none' }}
                 >
                   <ListItem alignItems="flex-start">

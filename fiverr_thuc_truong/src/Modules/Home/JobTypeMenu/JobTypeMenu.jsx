@@ -1,7 +1,8 @@
 // JobTypeMenu.jsx
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Grid, MenuItem, Typography } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getJobTypeMenuAPI } from '../../../API/jobAPI';
 
 const JobTypeMenu = () => {
@@ -50,16 +51,23 @@ const JobTypeMenu = () => {
             {item.dsNhomChiTietLoai && (
               <Box className="menuItemJobType">
                 {item.dsNhomChiTietLoai.map((group) => {
+                  console.log(group);
                   return (
-                    <Box p={200} key={group.id}>
-                      <Typography>{group.tenNhom}</Typography>
-                      {/* <ul>
+                    <Box p={2} key={group.id}>
+                      <Typography fontWeight={'bold'}>
+                        {group.tenNhom}
+                      </Typography>
+                      <ul>
                         {group.dsChiTietLoai.map((detail) => (
-                          <Link key={detail.id} to={'/jobs/' + detail.id}>
+                          <Link
+                            key={detail.id}
+                            to={'/jobs/' + detail.id}
+                            style={{ textDecoration: 'none', color: '#333' }}
+                          >
                             <MenuItem>{detail.tenChiTiet}</MenuItem>
                           </Link>
                         ))}
-                      </ul> */}
+                      </ul>
                     </Box>
                   );
                 })}

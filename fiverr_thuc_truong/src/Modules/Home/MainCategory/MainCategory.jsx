@@ -1,4 +1,5 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const icons = [
   'business.png',
@@ -24,11 +25,17 @@ const MainCategory = () => {
         mt={8}
       >
         {icons.map((item, index) => (
-          <Box key={index} textAlign={'center'}>
-            <img src={'./Image/main-category/' + item} alt={item} />
-
-            <Typography>Graphics & Design</Typography>
-          </Box>
+          <Link
+            key={index}
+            to={'jobs/' + index}
+            style={{ textDecoration: 'none', color: 'GrayText' }}
+          >
+            <Box textAlign={'center'}>
+              <img src={'./Image/main-category/' + item} alt={item} />
+              <Divider sx={{ scale: 0.5, ':hover': { scale: 1 } }} />
+              <Typography>Graphics & Design</Typography>
+            </Box>
+          </Link>
         ))}
       </Box>
     </div>

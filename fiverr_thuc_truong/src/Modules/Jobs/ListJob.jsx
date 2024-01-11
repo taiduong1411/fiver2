@@ -9,10 +9,13 @@ import Typography from '@mui/material/Typography';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
 import { getJobByTypeDetails } from '../../API/jobAPI';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import JobTypeMenu from '../Home/JobTypeMenu/JobTypeMenu';
 import FilterBar from './Filter/FilterBar';
 
 function ListJob() {
+  const media = useMediaQuery('(min-width: 768px)');
+
   let { id } = useParams();
 
   const { isLoading, data: jobItems = [] } = useQuery({
@@ -26,7 +29,8 @@ function ListJob() {
 
   return (
     <>
-      <JobTypeMenu />
+      {media && <JobTypeMenu />}
+
       <Box sx={{ mt: 5, mx: 5 }}>
         <FilterBar />
 

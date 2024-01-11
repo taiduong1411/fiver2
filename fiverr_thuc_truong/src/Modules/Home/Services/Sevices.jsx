@@ -1,10 +1,10 @@
-import Slider from "react-slick";
+import Slider from 'react-slick';
 const Sevices = () => {
   // Component nút chuyển qua tùy chỉnh
   const CustomNextArrow = (props) => (
     <div
       {...props}
-      style={{ ...props.style, display: "block", background: "red" }}
+      style={{ ...props.style, display: 'block', background: 'red' }}
     />
   );
 
@@ -12,7 +12,7 @@ const Sevices = () => {
   const CustomPrevArrow = (props) => (
     <div
       {...props}
-      style={{ ...props.style, display: "block", background: "green" }}
+      style={{ ...props.style, display: 'block', background: 'green' }}
     />
   );
   var settings = {
