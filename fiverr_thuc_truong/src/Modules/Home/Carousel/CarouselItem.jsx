@@ -27,7 +27,7 @@ const CarouselItem = () => {
   return (
     <Box
       position={'absolute'}
-      top={matches ? '20%' : '40%'}
+      top={matches ? '20%' : '20%'}
       maxWidth={!matches ? 400 : 620}
       p={3}
     >
@@ -39,88 +39,81 @@ const CarouselItem = () => {
         Find the perfect freelance services for your business
       </Typography>
 
-      {matches && (
-        <form
-          style={{
-            marginTop: 30,
-            marginBottom: 30,
-            height: 40,
-            minWidth: 500,
+      <Box
+        sx={{
+          height: '40px',
+          minWidth: matches ? '500px' : '300px',
+          mx: 5,
+          my: !matches ? 2 : 5,
+          display: 'flex',
+          flexDirection: matches ? 'row' : 'column',
+        }}
+      >
+        <InputBase
+          id="outlined-basic"
+          sx={{
+            bgcolor: 'white',
+            height: '100%',
+            width: !matches ? '100%' : '80%',
+            p: 1.5,
           }}
-          className="flex"
-          role="search"
+          placeholder="Search…"
+          value={search || ''}
+          onChange={handleSearch}
+          inputProps={{ 'aria-label': 'search' }}
+          flexWrap={'wrap'}
+        />
+
+        <Button
+          variant="contained"
+          color="success"
+          sx={{ height: '100%', borderRadius: '0' }}
+          type="submit"
         >
-          <InputBase
-            id="outlined-basic"
-            sx={{
-              bgcolor: 'white',
-              height: '100%',
-              width: !matches ? '40%' : '80%',
-              p: 1.5,
-            }}
-            placeholder="Search…"
-            value={search || ''}
-            onChange={handleSearch}
-            inputProps={{ 'aria-label': 'search' }}
-            flexWrap={'wrap'}
-          />
+          Search
+        </Button>
 
-          <Button
-            variant="contained"
-            color="success"
-            sx={{ height: '100%', borderRadius: '0' }}
-            type="submit"
-          >
-            Search
-          </Button>
-
-          <Box
-            zIndex={1}
-            position={'absolute'}
-            minWidth={400}
-            bgcolor={'white'}
-          >
-            {isLoading ? (
-              <ListItem alignItems="flex-start">
-                <p>Loading ....</p>
-              </ListItem>
-            ) : (
-              jobs.map((job) => (
-                <Link
-                  key={job.id}
-                  to={'jobs/' + job.id}
-                  onClick={handleSearch}
-                  style={{ textDecoration: 'none' }}
+        <Box zIndex={1} position={'absolute'} minWidth={400} bgcolor={'white'}>
+          {isLoading ? (
+            <ListItem alignItems="flex-start">
+              <p>Loading ....</p>
+            </ListItem>
+          ) : (
+            jobs.map((job) => (
+              <Link
+                key={job.id}
+                to={'jobs/' + job.id}
+                onClick={handleSearch}
+                style={{ textDecoration: 'none' }}
+              >
+                <ListItem
+                  sx={{ ':hover': { background: '#f1f1f1' } }}
+                  alignItems="flex-start"
                 >
-                  <ListItem
-                    sx={{ ':hover': { background: '#f1f1f1' } }}
-                    alignItems="flex-start"
-                  >
-                    <ListItemAvatar>
-                      <Avatar alt="Remy Sharp" src={job.congViec.hinhAnh} />
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary="Brunch this weekend?"
-                      secondary={
-                        <React.Fragment>
-                          <Typography
-                            sx={{ display: 'inline' }}
-                            component="span"
-                            variant="body2"
-                            color="text.primary"
-                          >
-                            {job.congViec.tenCongViec}
-                          </Typography>
-                        </React.Fragment>
-                      }
-                    />
-                  </ListItem>
-                </Link>
-              ))
-            )}
-          </Box>
-        </form>
-      )}
+                  <ListItemAvatar>
+                    <Avatar alt="Remy Sharp" src={job.congViec.hinhAnh} />
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="Brunch this weekend?"
+                    secondary={
+                      <React.Fragment>
+                        <Typography
+                          sx={{ display: 'inline' }}
+                          component="span"
+                          variant="body2"
+                          color="text.primary"
+                        >
+                          {job.congViec.tenCongViec}
+                        </Typography>
+                      </React.Fragment>
+                    }
+                  />
+                </ListItem>
+              </Link>
+            ))
+          )}
+        </Box>
+      </Box>
 
       {matches && (
         <Box display={'flex'} color={'white'} alignItems={'center'} gap={1}>

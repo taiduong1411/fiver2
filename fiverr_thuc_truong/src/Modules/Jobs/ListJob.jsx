@@ -30,14 +30,15 @@ function ListJob() {
       {media && <JobTypeMenu />}
 
       <Box sx={{ mt: 25, mx: 5 }}>
-        <Typography variant="h4" my={5}>
-          Results for {searchQuery ? searchQuery : ''}
-        </Typography>
+        {searchQuery && (
+          <Typography variant="h4" my={5}>
+            Results for {searchQuery}
+          </Typography>
+        )}
         <FilterBar />
         <Typography variant="subtitle1" my={5}>
           {jobItems.length} services available
         </Typography>
-
         <Grid container spacing={3}>
           {!isLoading &&
             jobItems.map((item) => (

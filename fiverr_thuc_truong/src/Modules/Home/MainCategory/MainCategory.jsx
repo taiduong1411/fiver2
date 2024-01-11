@@ -15,7 +15,12 @@ const icons = [
 const MainCategory = () => {
   return (
     <div className="container">
-      <Typography variant="h4">Explore the marketplace</Typography>
+      <Typography
+        variant="h4"
+        sx={{ display: 'inline-block', borderBottom: 'solid 1px #333' }}
+      >
+        Explore the marketplace
+      </Typography>
       <Box
         display={'flex'}
         justifyContent={'center'}
